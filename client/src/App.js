@@ -4,18 +4,21 @@ function App() {
   const [data, setData] = React.useState(null);
 
   useEffect(() => {
-    console.log("fetching")
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.messge));
+    getData();
   }, []);
 
+  async function getData() {
+    fetch("/api")
+      .then((res) => res.json())
+      // .then((data) => setData(data));
+      .then((data) => console.log(data));
+    return data;
+  }
+  
+
   return (
-    <div>
-      {data ? (
-        <h1>{data}</h1>
-      ) : 'Loading...'}
-    </div>
+    <>
+    </>
   );
 }
 
