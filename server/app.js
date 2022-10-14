@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.get("/play", (req, res) => {
-  // const deets = getFileInfo(); 
+app.get("/api", (req, res) => {
+  // const deets = getFileInfo();
   // console.log("return these deets: ", deets);
   // res.json(deets);
   // res.json({ message: "Hello from server!" });
