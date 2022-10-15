@@ -16,33 +16,56 @@ app.get("/play", (req, res) => {
   runCommand(soxCommand);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+// app.get("/stop", async (req, res) => {
+//   // const deets = getFileInfo(); 
+//   // console.log("return these deets: ", deets);
+//   // res.json(deets);
+//   // res.json({ message: "Hello from server!" });
+//   const soxCommand = "soxi -r test.mp3";
+//   const huh = runCommand(soxCommand);
+//   const resolveHuh = Promise.resolve(huh)
+//   console.log('huh:', huh)
+//   console.log('resolveHuh:', resolveHuh)
 
-// function getFileInfo() {
-//   const fileName = './test.mp3';
-//   // get audio details from audio file
-//   const soxCommand = `sox ${fileName} -n stat`;
-//   exec(soxCommand, (err, stdout, stderr) => {
-//     if (err) {
-//       console.error(err);
-//       return;
-//     }
-//     console.log('stdout: ', stdout);
-//     console.log(stderr);
-//   });
-//   // return the audio details in json format
-//   return stdout;
-// }
 
-function runCommand(command) {
-  exec(command, (error, stdout, stderr) => {
+//     resolveHuh.then((value) => {
+//       console.log("value: ", value);
+//       // expected output: 123
+//     });
+//   res.json({})
+// });
+
+app.get("/stop", async (req, res) => {
+  const result = exec("soxi -r test.mp3", (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
       return;
     }
-    console.log(`${stdout}`);
+    console.log(`am i even working??? ${stdout}`);
+    // console.log(' am i even working!!! ',stdout)
+    const endOfRunCommand = Promise.resolve(stdout);
+    // return resolve(stdout);
+    // return endOfRunCommand
+    res.json({message: stdout});
   });
-  return;
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
+
+async function runCommand(command) {
+  const returneth = exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    console.log(`am i even working??? ${stdout}`);
+    // console.log(' am i even working!!! ',stdout)
+    const endOfRunCommand = Promise.resolve(stdout);
+    // return resolve(stdout);
+    // return endOfRunCommand
+    return stdout;
+  });
+  return returneth;
 }
