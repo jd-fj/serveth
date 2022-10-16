@@ -35,17 +35,19 @@ app.get("/play", (req, res) => {
 //   res.json({})
 // });
 
-app.get("/stop", async (req, res) => {
-  const result = exec("soxi -r test.mp3", (error, stdout, stderr) => {
+app.get("/stat", async (req, res) => {
+  exec("sox test.mp3 -n stat", (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`);
       return;
     }
+    if (stderr) {
+      console.log("stderr: ", stderr)
+      const stat = stderr.trim().split("\n")
+      res.send({message: stat})
+    }
     console.log(`am i even working??? ${stdout}`);
-    // console.log(' am i even working!!! ',stdout)
-    const endOfRunCommand = Promise.resolve(stdout);
-    // return resolve(stdout);
-    // return endOfRunCommand
+
     res.json({message: stdout});
   });
 });

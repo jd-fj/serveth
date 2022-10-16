@@ -16,8 +16,8 @@ function App() {
     return data;
   }
 
-  async function stopSox() {
-    fetch("/stop")
+  async function runStat() {
+    fetch("/stat")
       .then((res) => res.json())
       .then((data) => setData(data.message))
       console.log("data??? ", data)
@@ -36,7 +36,7 @@ function App() {
   const handleStop = async (e) => {
     e.preventDefault();
     try {
-      await stopSox();
+      await runStat();
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +44,6 @@ function App() {
 
   return (
     <>
-    <h1>{data}h1</h1>
       <form onSubmit={handleSubmit}>
         <button 
         style={{
@@ -88,6 +87,12 @@ function App() {
           Stop
         </button>
       </form>
+      {data && 
+        data.map((stat) =>
+          <ul>
+            <li>{stat}</li>
+          </ul>
+        )}
     </>
   );
 }
