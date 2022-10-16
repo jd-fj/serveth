@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CustomButton from './components/customButton';
 
 function App() {
   const [statData, setStatData] = useState(null);
@@ -7,8 +8,8 @@ function App() {
   // const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    runStat();
-    runStats();
+    // runStat();
+    // runStats();
   }, []);
 
   async function playFile() {
@@ -43,6 +44,7 @@ function App() {
     e.preventDefault();
     try {
       await runStat();
+      await runStats();
     } catch (err) {
       console.log(err);
     }
@@ -52,47 +54,11 @@ function App() {
     <>
     <div>
         <form onSubmit={handleSubmit}>
-          <button 
-          style={{
-            fontSize: 100,
-            color: "rgb(247, 227, 243)",
-            fontFamily: "courier",
-            // textEmphasis: "triangle filled yellow",
-            // textEmphasis: "bold",
-            backgroundColor: "rgb(190, 127, 55)",
-            padding: "3%",
-            fontWeight: "bolder",
-            // border: "5px solid rgb(51, 31, 31)"
-            border: "none",
-            backgroundImage: 
-              "linear-gradient(rgb(237, 169, 187), rgb(207, 196, 233)",
-            boxShadow: "2px 2px 1px #f700ff30, 10px 10px 6px rgb(255, 254, 214)"
-          }}
-          type="submit">
-            Play
-          </button>
+          <CustomButton buttonText="Glay"></CustomButton>
         </form>
 
         <form onSubmit={triggerStatCommand}>
-          <button 
-          style={{
-            fontSize: 100,
-            color: "rgb(247, 227, 243)",
-            fontFamily: "courier",
-            // textEmphasis: "triangle filled yellow",
-            // textEmphasis: "bold",
-            backgroundColor: "rgb(190, 127, 55)",
-            padding: "3%",
-            fontWeight: "bolder",
-            // border: "5px solid rgb(51, 31, 31)"
-            border: "none",
-            backgroundImage: 
-              "linear-gradient(rgb(237, 169, 187), rgb(207, 196, 233)",
-            boxShadow: "2px 2px 1px #f700ff30, 10px 10px 6px rgb(255, 254, 214)"
-          }}
-          type="submit">
-            Stat
-          </button>
+          <CustomButton buttonText="Stat"></CustomButton>
         </form>
       </div>
 
